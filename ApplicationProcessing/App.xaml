@@ -1,0 +1,14 @@
+﻿<Application x:Class="ApplicationProcessing.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ApplicationProcessing">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Utilites\Converters\_ConverterDictionary.xaml" />
+                <ResourceDictionary Source="Resources\Styles\_StyleDictionary.xaml" />
+                <ResourceDictionary Source="Resources\Language\lang.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

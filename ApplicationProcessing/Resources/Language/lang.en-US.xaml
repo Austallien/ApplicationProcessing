@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:m="clr-namespace:System;assembly=mscorlib">
+    <m:String x:Key="StringAuthInscription">Authorization</m:String>
+    <m:String x:Key="StringApplicationStatusInscription">Status:</m:String>
+    <m:String x:Key="StringCancelInscription">Cancel</m:String>
+    <m:String x:Key="StringApplyInscription">Apply</m:String>
+</ResourceDictionary>

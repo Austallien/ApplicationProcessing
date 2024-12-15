@@ -1,0 +1,379 @@
+﻿<Page x:Class="ApplicationProcessing.Core.Views.Pages.OperatorApplicationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:ApplicationProcessing.Core.Views.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OperatorApplicationPage"
+      Loaded="Page_Loaded">
+
+    <Grid x:Name="GridGeneral">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="GridWorkspace">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="GridApplicationRead"
+                  IsEnabled="{Binding IsEditMode, Converter={StaticResource ResourceKey=InverseBoolConverter}}"
+                  Visibility="{Binding IsEditMode, Converter={StaticResource ResourceKey=BoolToCollapsedVisibilityConverter}, ConverterParameter=!}"
+                  Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="GridDetail"
+                      Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TextBlockTitle"
+                               Grid.Row="0" Grid.Column="0"
+                               Style="{StaticResource ResourceKey=TextBlockTitle}"
+                               Text="{Binding Path=Application.Title}" />
+
+                    <Grid x:Name="GridTimestamps"
+                          Grid.Row="1" Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock x:Name="TextBlockCreatedInscription"
+                                   Grid.Row="0" Grid.Column="0"
+                                   Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                   Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringCreatedInscription}}" />
+
+                        <TextBlock x:Name="TextBlockCreatedValue"
+                                   Grid.Row="0" Grid.Column="1"
+                                   Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                   Text="{Binding Path=Application.Created, StringFormat={}{0:f}}" />
+
+                        <TextBlock x:Name="TextBlockUpdatedInscription"
+                                   Grid.Row="1" Grid.Column="0"
+                                   Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                   Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringUpdatedInscription}}" />
+
+                        <TextBlock x:Name="TextBlockUpdatedValue"
+                                   Grid.Row="1" Grid.Column="1"
+                                   Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                   Text="{Binding Path=Application.Updated, StringFormat={}{0:f}}" />
+                    </Grid>
+
+                    <TextBox x:Name="TextBoxContent"
+                             Grid.Row="2" Grid.Column="0"
+                             Style="{StaticResource ResourceKey=TextBoxGeneral }"
+                             Text="{Binding Path=Application.Content}"
+                             SelectionChanged="TextBoxContent_SelectionChanged"
+                             Cursor="Arrow"
+                             TextWrapping="Wrap"
+                             IsReadOnly="True"
+                             IsReadOnlyCaretVisible="False"
+                             BorderThickness="0" />
+                </Grid>
+
+                <Grid x:Name="GridHistory"
+                      Grid.Row="0" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <ListView x:Name="ListViewHistory"
+                              Grid.Row="0" Grid.Column="0"
+                              Style="{StaticResource ResourceKey=ListViewGeneral}"
+                              ItemsSource="{Binding Path=Application.History}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="GridHistoryItem">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock x:Name="TextBlockHistoryOperation"
+                                               Grid.Row="0" Grid.Column="0"
+                                               Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                               Text="{Binding Path=Operation.Name}" />
+
+                                    <TextBlock x:Name="TextBlockHistoryTimestamp"
+                                               Grid.Row="1" Grid.Column="0"
+                                               Style="{StaticResource ResourceKey=TextBlockSmall}"
+                                               Text="{Binding Path=Timestamp, StringFormat={}{0:f}}" />
+
+                                    <Grid.ToolTip>
+                                        <Grid x:Name="GridHistoryItemToolTip">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock x:Name="TextBlockHistoryDescriptionToolTip"
+                                                       Grid.Row="0" Grid.Column="0"
+                                                       Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                                       Text="{Binding Path=Description}" />
+                                        </Grid>
+                                    </Grid.ToolTip>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+            </Grid>
+
+            <Grid x:Name="GridApplicationEdit"
+                  IsEnabled="{Binding IsEditMode}"
+                  Visibility="{Binding IsEditMode, Converter={StaticResource ResourceKey=BoolToCollapsedVisibilityConverter}}"
+                  Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="TextBlockTitleInscription"
+                           Grid.Row="0" Grid.Column="0"
+                           Style="{StaticResource ResourceKey=TextBlockGeneral}"
+                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringTitleInscription}}" />
+                <TextBox x:Name="TextBoxTitleValue"
+                         Grid.Row="0" Grid.Column="1"
+                         Style="{StaticResource ResourceKey=TextBoxGeneral}"
+                         Text="{Binding Path=EditingApplication.Title}" />
+
+                <TextBlock x:Name="TextBlockClientInscription"
+                           Grid.Row="1" Grid.Column="0"
+                           Style="{StaticResource ResourceKey=TextBlockGeneral}"
+                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringClientInscription}}" />
+                <StackPanel x:Name="StackPanelClient"
+                            Grid.Row="1" Grid.Column="1"
+                            Orientation="Horizontal">
+
+                    <Button x:Name="ButtonSelectClient"
+                            Style="{StaticResource ResourceKey=ButtonGeneral}"
+                            Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                            Visibility="{Binding Path=IsClientEditingEnabled, Converter={StaticResource BoolToCollapsedVisibilityConverter}}"
+                            IsEnabled="{Binding Path=IsClientEditingEnabled}"
+                            Command="{Binding Path=SelectClientCommand}"
+                            Content="..." />
+
+                    <TextBlock x:Name="TextBlockClientValue"
+                               Style="{StaticResource ResourceKey=TextBlockGeneral}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1} {2}">
+                                <Binding Path="EditingApplication.Client.FirstName" />
+                                <Binding Path="EditingApplication.Client.MiddleName" />
+                                <Binding Path="EditingApplication.Client.LastName" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+
+                        <TextBlock.ToolTip>
+                            <Grid x:Name="GridClientToolTip">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock x:Name="TextBlockClientToolTipIdInscription"
+                                           Grid.Row="0" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringIdInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipIdValue"
+                                           Grid.Row="0" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.Id}" />
+
+                                <TextBlock x:Name="TextBlockClientToolTipUsernameInscription"
+                                           Grid.Row="1" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringUsernameInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipUsernameValue"
+                                           Grid.Row="1" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.User.Username}" />
+
+                                <TextBlock x:Name="TextBlockClientToolTipFirstNameInscription"
+                                           Grid.Row="2" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringFirstNameInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipFirstNameValue"
+                                           Grid.Row="2" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.FirstName}" />
+
+                                <TextBlock x:Name="TextBlockClientToolTipMiddleNameInscription"
+                                           Grid.Row="3" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringMiddleNameInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipMiddleNameValue"
+                                           Grid.Row="3" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.MiddleName}" />
+
+                                <TextBlock x:Name="TextBlockClientToolTipLastNameInscription"
+                                           Grid.Row="4" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringLastNameInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipLastNameValue"
+                                           Grid.Row="4" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.LastName}" />
+
+                                <TextBlock x:Name="TextBlockClientToolTipBirthInscription"
+                                           Grid.Row="5" Grid.Column="0"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringBirthInscription}}" />
+                                <TextBlock x:Name="TextBlockClientToolTipBirthNameValue"
+                                           Grid.Row="5" Grid.Column="1"
+                                           Style="{StaticResource ResourceKey=TextBlockToolTipField}"
+                                           Text="{Binding Path=EditingApplication.Client.Birth, StringFormat={}{0:dd.MM.yyyy}}" />
+                            </Grid>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+
+                    <Button x:Name="ButtonRemoveClient"
+                            Style="{StaticResource ResourceKey=ButtonRed}"
+                            Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                            Visibility="{Binding Path=IsClientSelected, Converter={StaticResource BoolToCollapsedVisibilityConverter}}"
+                            IsEnabled="{Binding Path=IsClientSelected}"
+                            Command="{Binding Path=RemoveClientCommand}"
+                            Content="X" />
+                </StackPanel>
+
+                <TextBox x:Name="TextBoxContentEdit"
+                         Grid.Row="2" Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         TextWrapping="Wrap"
+                         Style="{StaticResource ResourceKey=TextBoxGeneral}"
+                         Text="{Binding Path=EditingApplication.Content}" />
+
+                <TextBlock x:Name="TextBlockTagsInscription"
+                           Grid.Row="3" Grid.Column="0"
+                           Style="{StaticResource ResourceKey=TextBlockGeneral}"
+                           Text="{Binding StringFormat={}{0}:, Source={StaticResource ResourceKey=StringTagsInscription}}" />
+                <StackPanel x:Name="StackPanelTagsContainer"
+                            Grid.Row="3" Grid.Column="1"
+                            Orientation="Horizontal"
+                            CanHorizontallyScroll="False"
+                            CanVerticallyScroll="False">
+
+                    <Button x:Name="ButtonSelectTags"
+                            Style="{StaticResource ResourceKey=ButtonGeneral}"
+                            Width="{Binding RelativeSource={RelativeSource Mode=Self}, Path=ActualHeight}"
+                            Content="..."
+                            Command="{Binding Path=SelectTagsCommand}" />
+
+                    <ListBox x:Name="ListBoxTags"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             Padding="-4"
+                             VerticalContentAlignment="Center"
+                             ItemsSource="{Binding Path=EditingApplication.Tags}"
+                             DisplayMemberPath="Name">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" VerticalAlignment="Center" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Focusable" Value="False" />
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </StackPanel>
+            </Grid>
+
+            <Grid x:Name="GridMenu"
+                  Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{DynamicResource ResourceKey=ItemHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                    <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="ButtonBack"
+                        Grid.Row="0" Grid.Column="0"
+                        Style="{StaticResource ResourceKey=ButtonRed}"
+                        Command="{Binding Path=BackCommand}"
+                        Content="{StaticResource ResourceKey=StringBackInscription}" />
+
+                <Button x:Name="ButtonEdit"
+                        IsEnabled="{Binding Path=IsEditMode, Converter={StaticResource ResourceKey=InverseBoolConverter}}"
+                        Visibility="{Binding Path=IsEditMode, Converter={StaticResource ResourceKey=BoolToCollapsedVisibilityConverter}, ConverterParameter=!}"
+                        Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource ResourceKey=ButtonGeneral}"
+                        Command="{Binding Path=EditCommand}"
+                        Content="{StaticResource ResourceKey=StringEditInscription}" />
+
+                <Button x:Name="ButtonCancel"
+                        IsEnabled="{Binding Path=IsCancellationEnabled}"
+                        Visibility="{Binding Path=IsCancellationEnabled, Converter={StaticResource ResourceKey=BoolToCollapsedVisibilityConverter}}"
+                        Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource ResourceKey=ButtonRed}"
+                        Command="{Binding Path=CancelCommand}"
+                        Content="{StaticResource ResourceKey=StringCancelInscription}" />
+
+                <Button x:Name="ButtonApply"
+                        Grid.Row="0" Grid.Column="3"
+                        IsEnabled="{Binding Path=IsEditMode}"
+                        Style="{StaticResource ResourceKey=ButtonGreen}"
+                        Command="{Binding Path=ApplyCommand}"
+                        Content="{StaticResource ResourceKey=StringApplyInscription}" />
+            </Grid>
+            <Grid.Resources>
+                <GridLength x:Key="ItemWidth">100</GridLength>
+                <GridLength x:Key="ItemHeight">30</GridLength>
+            </Grid.Resources>
+        </Grid>
+    </Grid>
+</Page>

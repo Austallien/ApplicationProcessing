@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ApplicationProcessing.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UserJSON" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{\"Id\":1,\"FirstName\":\"FirstName\",\"MiddleName\":\"MiddleName\",\"LastName\":\"LastName\",\"Username\":\"DatabaseNotImplementerDeature\"}</Value>
+    </Setting>
+    <Setting Name="RememberUser" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SignedIn" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2024-04-12</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

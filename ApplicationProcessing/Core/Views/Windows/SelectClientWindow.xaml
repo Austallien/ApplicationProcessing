@@ -1,0 +1,141 @@
+﻿<Window x:Class="ApplicationProcessing.Core.Views.Windows.SelectClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationProcessing.Core.Views.Windows"
+        mc:Ignorable="d"
+        Title="{StaticResource ResourceKey=ApplicationTitle}"
+        Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid x:Name="GridGeneral">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="GridWorkspace"
+              Grid.Row="0" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid x:Name="GridClients"
+                  Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid x:Name="GridFilter"
+                      Grid.Row="0" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{DynamicResource ItemHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="ButtonSearch"
+                            Grid.Row="0" Grid.Column="0"
+                            Style="{StaticResource ResourceKey=ButtonGreen}"
+                            Content="{StaticResource ResourceKey=StringSearchInscription}"
+                            Command="{Binding SearchCommand}" />
+
+                    <TextBox x:Name="TextBoxKeys"
+                             Grid.Row="0" Grid.Column="1"
+                             Style="{StaticResource ResourceKey=TextBoxGeneral}"
+                             VerticalContentAlignment="Center"
+                             Text="{Binding KeyString}" />
+
+                    <Grid.Resources>
+                        <GridLength x:Key="ItemWidth">100</GridLength>
+                        <GridLength x:Key="ItemHeight">30</GridLength>
+                    </Grid.Resources>
+                </Grid>
+
+                <DataGrid x:Name="DataGridClients"
+                          Grid.Row="1" Grid.Column="0"
+                          RowDetailsVisibilityMode="Collapsed"
+                          Style="{StaticResource ResourceKey=DataGridGeneral}"
+                          ItemsSource="{Binding Clients}"
+                          SelectedItem="{Binding SelectedClient}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringIdInscription}"
+                                            Width="auto"
+                                            SortMemberPath="Id"
+                                            Binding="{Binding Path=Id}" />
+
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringUsernameInscription}"
+                                            Width="*"
+                                            SortMemberPath="User.Username"
+                                            Binding="{Binding Path=User.Username}" />
+
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringFirstNameInscription}"
+                                            Width="auto"
+                                            SortMemberPath="FirstName"
+                                            Binding="{Binding Path=FirstName}" />
+
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringMiddleNameInscription}"
+                                            Width="auto"
+                                            SortMemberPath="MiddleName"
+                                            Binding="{Binding Path=MiddleName}" />
+
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringLastNameInscription}"
+                                            Width="auto"
+                                            SortMemberPath="LastName"
+                                            Binding="{Binding Path=LastName}" />
+
+                        <DataGridTextColumn Header="{StaticResource ResourceKey=StringBirthInscription}"
+                                            Width="auto"
+                                            SortMemberPath="Birth"
+                                            Binding="{Binding Path=Birth, StringFormat={}{0:dd.MM.yyyy}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid x:Name="GridMenu"
+                  Grid.Row="2" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{DynamicResource ItemHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="{DynamicResource ResourceKey=ItemWidth}" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="ButtonCancel"
+                        Grid.Row="0" Grid.Column="0"
+                        Style="{StaticResource ResourceKey=ButtonRed}"
+                        Content="{StaticResource ResourceKey=StringCancelInscription}"
+                        Command="{Binding CancelCommand}" />
+
+                <Button x:Name="ButtonSelect"
+                        Grid.Row="0" Grid.Column="2"
+                        Style="{StaticResource ResourceKey=ButtonGreen}"
+                        IsEnabled="{Binding IsSelected}"
+                        Content="{StaticResource ResourceKey=StringSelectInscription}"
+                        Command="{Binding SelectCommand}" />
+            </Grid>
+
+            <Grid.Resources>
+                <GridLength x:Key="ItemWidth">100</GridLength>
+                <GridLength x:Key="ItemHeight">30</GridLength>
+            </Grid.Resources>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:core="clr-namespace:System;assembly=mscorlib">
+    <core:String x:Key="ApplicationTitle">Application processing</core:String>
+
+    <core:String x:Key="StringAuthorizationInscription">Authorization</core:String>
+    <core:String x:Key="StringLoginInscription">Login</core:String>
+    <core:String x:Key="StringPasswordInscription">Password</core:String>
+
+    <core:String x:Key="StringSignInInscription">Sign In</core:String>
+    <core:String x:Key="StringSignOutInscription">Sign Out</core:String>
+    <core:String x:Key="StringRememberMeInscription">Remember me</core:String>
+    <core:String x:Key="StringCancelInscription">Cancel</core:String>
+    <core:String x:Key="StringBackInscription">Back</core:String>
+    <core:String x:Key="StringSelectInscription">Select</core:String>
+    <core:String x:Key="StringApplyInscription">Apply</core:String>
+    <core:String x:Key="StringConfirmInscription">Confirm</core:String>
+    <core:String x:Key="StringEditInscription">Edit</core:String>
+    <core:String x:Key="StringOpenInscription">Open</core:String>
+    <core:String x:Key="StringDeleteInscription">Delete</core:String>
+    <core:String x:Key="StringCreateInscription">Create</core:String>
+    <core:String x:Key="StringSearchInscription">Search</core:String>
+
+    <core:String x:Key="StringInvalidCredentialsTip">Invalid login and/or password</core:String>
+
+    <core:String x:Key="StringIdInscription">Id</core:String>
+    <core:String x:Key="StringTitleInscription">Title</core:String>
+    <core:String x:Key="StringContentInscription">Content</core:String>
+    <core:String x:Key="StringClientInscription">Client</core:String>
+    <core:String x:Key="StringCreatedInscription">Created</core:String>
+    <core:String x:Key="StringUpdatedInscription">Updated</core:String>
+    <core:String x:Key="StringStatusInscription">Status</core:String>
+    <core:String x:Key="StringTagsInscription">Tags</core:String>
+
+    <core:String x:Key="StringUserInscription">User</core:String>
+    <core:String x:Key="StringDataInscription">Data</core:String>
+
+    <core:String x:Key="StringRefreshInscription">Refresh</core:String>
+
+    <core:String x:Key="StringUsernameInscription">Username</core:String>
+    <core:String x:Key="StringFirstNameInscription">First name</core:String>
+    <core:String x:Key="StringMiddleNameInscription">Middle name</core:String>
+    <core:String x:Key="StringLastNameInscription">Last name</core:String>
+    <core:String x:Key="StringBirthInscription">Birth</core:String>
+</ResourceDictionary>
